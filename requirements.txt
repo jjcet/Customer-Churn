@@ -9,4 +9,13 @@ seaborn>=0.7.0
 scikit-learn
 scipy
 notebook
+boto3
+pyYAML
+mypy-boto3-s3
+python-box==7.0.1
+ensure==1.0.2
+fastapi==0.78.0
+uvicorn==0.18.3
+Jinja2==3.1.2
+ensure
 -e .
