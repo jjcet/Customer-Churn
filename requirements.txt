@@ -1,0 +1,12 @@
+torch==1.9.0
+datasets
+numpy 
+matplotlib 
+pandas
+numpy>=1.10.4
+pandas>=0.17.1
+seaborn>=0.7.0
+scikit-learn
+scipy
+notebook
+-e .
