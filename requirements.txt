@@ -1,4 +1,12 @@
 torch==1.9.0
+catboost==1.0.4
+joblib==1.1.0
+lightgbm==3.3.2
+optuna==2.10.0
+streamlit==1.8.1
+xgboost==1.5.2
+markupsafe==2.0
+zenml==0.43
 datasets
 numpy 
 matplotlib 
@@ -18,4 +26,5 @@ fastapi==0.78.0
 uvicorn==0.18.3
 Jinja2==3.1.2
 ensure
+orjson
 -e .
