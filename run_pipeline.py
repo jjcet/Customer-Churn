@@ -1,9 +1,10 @@
-from pipelines.training_pipeline import train_pipeline
+from pipelines.training_pipeline import ChurnPipeline
 from pathlib import Path
 
 
-print("before run pipeline")
-digits_svc_pipeline =train_pipeline()
 
-print("after run pipeline")
+if __name__ == '__main__':
+    ChurnPipeline(data_path="data\\rawdata.csv")
+
+
 

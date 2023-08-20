@@ -7,10 +7,8 @@ streamlit==1.8.1
 xgboost==1.5.2
 markupsafe==2.0
 zenml==0.43
-datasets
-numpy 
-matplotlib 
-pandas
+datasets 
+matplotlib
 numpy>=1.10.4
 pandas>=0.17.1
 seaborn>=0.7.0
@@ -25,6 +23,5 @@ ensure==1.0.2
 fastapi==0.78.0
 uvicorn==0.18.3
 Jinja2==3.1.2
-ensure
 orjson
 -e .
