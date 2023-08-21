@@ -8,7 +8,18 @@ import logging
 from typing_extensions import Annotated
 from typing import Tuple
 
-@step
+import mlflow
+
+from zenml.client import Client
+
+
+experiment_tracker = Client()
+experiment_tracker.activate_stack(stack_name_id_or_prefix="mlflow_stack")
+
+
+
+
+@step(experiment_tracker="mlflow_tracker")
 def evaluator(
       X_test : np.ndarray,
       y_test : np.ndarray,
@@ -21,10 +32,13 @@ def evaluator(
     try:
 
         prediction = model.predict(X_test)
-
+        
         accuracy_class = Accuracy()
         accuracy = accuracy_class.calculate_scores(y_pred=prediction, y_true=y_test)
+        mlflow.log_metric("accuracy", accuracy)
         print(f"Test accuracy : {accuracy}")
+        mlflow.log_metric("F1 Score", 0)
+
         return accuracy, 0.0
     except Exception as e:
         logging.error("Error calculating scores")

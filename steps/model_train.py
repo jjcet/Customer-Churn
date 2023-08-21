@@ -15,8 +15,17 @@ import logging
 from .config import ModelNameConfig
 
 
+import mlflow
 
-@step
+from zenml.client import Client
+
+experiment_tracker = Client()
+experiment_tracker.activate_stack(stack_name_id_or_prefix="mlflow_stack")
+
+
+
+
+@step(experiment_tracker="mlflow_tracker")
 def trainer(
       X_train : np.ndarray,
       y_train : np.ndarray,
@@ -25,6 +34,7 @@ def trainer(
     try:
         classifier = None
         if config.model_name == "GradientBoostingClassifier":
+            mlflow.sklearn.autolog()
             model = GradientBoostClassifier()
             trained_classifier = model.train(X_train=X_train, y_train=y_train)
             return trained_classifier
