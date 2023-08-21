@@ -12,6 +12,6 @@ def ChurnPipeline(data_path : str):
   model = trainer(
       X_train =  X_train,
       y_train = y_train)
-  evaluator(X_test = X_test,
+  accuracy_score, f1_score = evaluator(X_test = X_test,
       y_test = y_test,
       model = model)
