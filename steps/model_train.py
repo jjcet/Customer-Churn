@@ -19,13 +19,13 @@ import mlflow
 
 from zenml.client import Client
 
-experiment_tracker = Client()
-experiment_tracker.activate_stack(stack_name_id_or_prefix="mlflow_stack")
+#experiment_tracker = Client()
+#experiment_tracker.activate_stack(stack_name_id_or_prefix="mlflow_stack_customer")
 
 
 
 
-@step(experiment_tracker="mlflow_tracker")
+@step(experiment_tracker="mlflow_tracker_customer")
 def trainer(
       X_train : np.ndarray,
       y_train : np.ndarray,
@@ -37,6 +37,8 @@ def trainer(
             mlflow.sklearn.autolog()
             model = GradientBoostClassifier()
             trained_classifier = model.train(X_train=X_train, y_train=y_train)
+
+            mlflow.sklearn.log_model(trained_classifier, "model")
             return trained_classifier
         else: 
             raise ValueError("Model {} not supported".format(config))
