@@ -19,13 +19,11 @@ import mlflow
 
 from zenml.client import Client
 
-#experiment_tracker = Client()
-#experiment_tracker.activate_stack(stack_name_id_or_prefix="mlflow_stack_customer")
+experiment_tracker = Client().active_stack.experiment_tracker
+Client.active_workspace
 
 
-
-
-@step(experiment_tracker="mlflow_tracker_customer")
+@step(experiment_tracker=experiment_tracker.name)
 def trainer(
       X_train : np.ndarray,
       y_train : np.ndarray,
@@ -37,7 +35,7 @@ def trainer(
             mlflow.sklearn.autolog()
             model = GradientBoostClassifier()
             trained_classifier = model.train(X_train=X_train, y_train=y_train)
-
+            #mlflow.sklearn.log_model(sk_model=trained_classifier)
             mlflow.sklearn.log_model(trained_classifier, "model")
             return trained_classifier
         else: 

@@ -9,8 +9,10 @@ import mlflow
 from zenml.client import Client
 from sklearn.base import ClassifierMixin
 
-#experiment_tracker = Client()
-#experiment_tracker.activate_stack(stack_name_id_or_prefix="mlflow_stack_customer")
+experiment_tracker = Client().active_stack.experiment_tracker
+
+
+
 
 @step
 def evaluator(

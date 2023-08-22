@@ -5,6 +5,8 @@ from steps.evaluation import evaluator
 from steps.ingest_data import data_ingestion
 
 
+
+
 @pipeline(enable_cache=False)
 def ChurnPipeline(data_path : str):
   raw_df = data_ingestion(data_path=data_path)
@@ -15,3 +17,4 @@ def ChurnPipeline(data_path : str):
   accuracy_score, f1_score = evaluator(X_test = X_test,
       y_test = y_test,
       model = model)
+  
