@@ -39,12 +39,13 @@ def continous_deployment_pipeline(
     workers: int = 1,
     timeout: int = DEFAULT_SERVICE_START_STOP_TIMEOUT
 ):
-    raw_df = data_ingestion(data_path=data_path)
+    raw_df = data_ingestion()
     X_train, X_test, y_train, y_test = data_preparation(raw_df = raw_df)
     model = trainer(
-    X_train =  X_train,
-    y_train = y_train)
-    accuracy_score, f1_score = evaluator(X_test = X_test,
+      X_train =  X_train,
+      y_train = y_train)
+
+    accuracy_score, f1_score,precision_score, recall_score, specificity_score  = evaluator(X_test = X_test,
       y_test = y_test,
       model = model)
     
