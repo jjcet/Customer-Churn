@@ -3,7 +3,7 @@ from zenml import  step
 import pandas as pd
 import logging
 
-
+from .config import DataConfig
 class IngestData:
     def __init__(self,data_path: str):
         self.data_path = data_path
@@ -17,13 +17,13 @@ class IngestData:
 
 @step
 def data_ingestion(
-      data_path : str,
+    config: DataConfig,
   ) -> pd.DataFrame:
     """
     Ingesting the data pipeline step
     """
     try:
-        ingest_data = IngestData(data_path=data_path)
+        ingest_data = IngestData(data_path=config.data_path)
         df = ingest_data.get_data()
         return df
     except Exception as e:

@@ -15,15 +15,15 @@ import logging
 from .config import ModelNameConfig
 
 
-import mlflow
+#import mlflow
 
-from zenml.client import Client
+#from zenml import Client
 
-experiment_tracker = Client().active_stack.experiment_tracker
-Client.active_workspace
+#experiment_tracker = Client().active_stack.experiment_tracker
+#(experiment_tracker=experiment_tracker.name)
 
 
-@step(experiment_tracker=experiment_tracker.name)
+@step
 def trainer(
       X_train : np.ndarray,
       y_train : np.ndarray,
@@ -32,11 +32,11 @@ def trainer(
     try:
         classifier = None
         if config.model_name == "GradientBoostingClassifier":
-            mlflow.sklearn.autolog()
+            #mlflow.sklearn.autolog()
             model = GradientBoostClassifier()
             trained_classifier = model.train(X_train=X_train, y_train=y_train)
             #mlflow.sklearn.log_model(sk_model=trained_classifier)
-            mlflow.sklearn.log_model(trained_classifier, "model")
+            #mlflow.sklearn.log_model(trained_classifier, "model")
             return trained_classifier
         else: 
             raise ValueError("Model {} not supported".format(config))
